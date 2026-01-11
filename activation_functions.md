@@ -22,6 +22,8 @@ Weakness: For negative inputs , the output and gradient are 0. This leads to "dy
 ## Tanh (Hyperbolic Tangent)
 $\tanh(x) = \frac{e^{x} - e^{-x}}{e^{x} + e^{-x}}$
 
+Range(-1,1)
+
 Unlike sigmoid, this is zero centered , which helps gradients flow more efficiently during optimization.
 
 
