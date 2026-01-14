@@ -75,3 +75,47 @@ $$
 Instead of calculating these derivatives one by one, backprop uses Dynamic Programming. It calculates the gradient for the final layer and caches it. 
 the layer before it uses that stored value to calculate its own gradient, avoiding redundant calculations.
 
+
+
+
+Backpropagation is **not an algorithm separate from gradient descent**.  
+It is simply an **efficient way to compute gradients** of the loss with respect to every parameter.
+
+At its core, backprop answers one question repeatedly:
+
+> If I change this parameter slightly, how much does the final loss change?
+
+
+
+
+## The Core Idea
+
+Every neural network is just a **composition of functions**.
+
+Example (single neuron):
+
+z = wx + b  
+a = σ(z)  
+L = loss(a)
+
+The loss does **not** depend directly on w.  
+It depends on a → which depends on z → which depends on w.
+
+So gradients must flow **backward through these dependencies**.
+
+This is exactly what the **chain rule** does.
+
+
+## Why Gradients Flow Backward
+
+During the forward pass:
+- Information flows from input → output
+- We compute activations and final loss
+
+During the backward pass:
+- Influence flows from loss → parameters
+- We ask: *which parameters caused this loss?*
+
+Each layer receives a gradient from the layer ahead of it and:
+1. Uses it to compute its own parameter gradients
+2. Passes a new gradient further backward
